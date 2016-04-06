@@ -1,8 +1,44 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/*Variables */
+/*Variables and mixins*/
 $light-gray: #777;
+@mixin box-sizing {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* styles for the debug */
+.debug_dump {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin-top: 45px;
+    @include box-sizing;
+}
+
+/*styles for error messages */
+#error_explanation {
+    color: red;
+    ul {
+        color: red;
+        margin: 0 0 30px 0;
+    }
+}
+
+
+/*styles for the forms */
+input, textarea, select {
+    border: 1px solid #bbb;
+    width: 100%;
+    margin-bottom: 15px;
+    @include box-sizing;
+}
+
+input {
+    height: auto !important;
+}
 
 /*Universal styles for the page */
 
@@ -84,5 +120,35 @@ footer {
     li {
         float: left;
         margin-left: 15px;
+    }
+}
+
+/*styles for the gravatar */
+aside {
+    section.user_infor{
+        margin-top: 20px;
+    }
+    section {
+        padding: 10px 0;
+        margin-top: 20px;
+    
+    &:first-child {
+        border: 0;
+        padding-top: 0;
+    }
+    span {
+        display: block;
+        margin-bottom: 3px;
+        line-height: 1;
+    }
+    
+    h1 {
+        font-size: 1.4em;
+        text-align: left;
+        letter-spacing: -1px;
+        margin-bottom: 3px;
+        margin-top: 0px;
+        
+     }
     }
 }
