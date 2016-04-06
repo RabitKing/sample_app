@@ -1,7 +1,7 @@
 <%= provide(:title, "Sign Up")%>
 <h1>Sign Up</h1>
 <div class="row">
-    <form class="col-md-6 col-offset-3">
+    <div class="col-md-6 col-offset-3">
     <%= render 'shared/error_messages'%>
     
       <%= form_for(@user) do |f| %>
@@ -21,5 +21,5 @@
          <%= f.submit "Create Account",
          class: "btn btn-primary" %>
       <%end%>
-  </form>
+  </div>
 </div>
