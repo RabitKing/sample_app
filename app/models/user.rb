@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+    attr_accessor :remember_token
     before_save {self.email = email.downcase}
     
     VALIDATE_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -11,10 +12,19 @@ class User < ActiveRecord::Base
     validates :password, length:{minimum: 6}
     
     def User.digest(string)
-        # returns the hash digest of a given string
-        cost = ActiveModel::SecurePassword.min_cost ?
-        BCrypt::Engine::MIN_COST :
-        BCrypt::Engine.cost
-        BCrypt::Password.create(string, cost: cost)
+      cost = ActiveModel::SecurePassword.min_cost ? 
+      BCrypt::Engine::MIN_COST :
+      BCrypt::Engine.cost
+      BCrypt::Password.create(string, cost: cost)
+    end
+    
+    # generates a new random token 
+    def User.token
+      SecureRandom.urlsafe_base64
+    end
+    
+    def remember 
+      self.remember_token = User.new_token
+      update_attribute(:remember_digest, User_digest(remember_token))
     end
 end
