@@ -27,4 +27,9 @@ class User < ActiveRecord::Base
       self.remember_token = User.new_token
       update_attribute(:remember_digest, User_digest(remember_token))
     end
+    # return true if remember token matches digest
+    def authenticated?(remember_token)
+      return false if remember_digest.nil?
+      BCrypt::Password.new(:remember_digest) == remember_token          
+    end
 end
